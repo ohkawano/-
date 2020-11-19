@@ -1,56 +1,59 @@
-//package com.example.demo.model;
-//
-//import javax.persistence.Column;
-//import javax.persistence.Entity;
-//import javax.persistence.GeneratedValue;
-//import javax.persistence.GenerationType;
-//
-//import org.springframework.data.annotation.Id;
-//
-//@Entity
-//public class Talk {
-//
-//	@Id
-//	@GeneratedValue(strategy = GenerationType.AUTO)
-//	private Long id;
-//	@Column(length = 100)
-//	private String userName;
-//	@Column(length = 140)
-//	private String cooment;
-//
-//	public Talk(Long id, String userName, String cooment) {
-//		super();
-//		this.id = id;
-//		this.userName = userName;
-//		this.cooment = cooment;
-//	}
-//
-//	public Talk() {
-//
-//	}
-//
-//	public Long getId() {
-//		return id;
-//	}
-//
-//	public void setId(Long id) {
-//		this.id = id;
-//	}
-//
-//	public String getUserName() {
-//		return userName;
-//	}
-//
-//	public void setUserName(String userName) {
-//		this.userName = userName;
-//	}
-//
-//	public String getCooment() {
-//		return cooment;
-//	}
-//
-//	public void setCooment(String cooment) {
-//		this.cooment = cooment;
-//	}
-//
-//}
+package com.example.demo.model;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
+
+@Entity
+public class Talk {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private long id;
+
+	@NotBlank
+	@Size(max = 10)
+	private String name;
+
+	@NotBlank
+	@Size(max = 500)
+	private String comment;
+
+	public Talk() {
+
+	}
+
+	public Talk(long id, @NotBlank @Size(max = 10) String name, @NotBlank @Size(max = 500) String comment) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.comment = comment;
+	}
+
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getComment() {
+		return comment;
+	}
+
+	public void setComment(String comment) {
+		this.comment = comment;
+	}
+
+}

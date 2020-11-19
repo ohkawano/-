@@ -7,7 +7,6 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-
     <title>maru一覧</title>
   </head>
   <body>
@@ -18,15 +17,29 @@
 			<div class = "col-xs-3" style = "background-color:#7fbfff">
 				<h1>投稿フォーム</h1>
 				<!-- 実際に投稿する内容を入力します -->
-				<form action ="#" method ="post">
-						<textarea placeholder = "頑張ったことを書いてね">
-						</textarea>
-						<br>
-						<input type="submit" value = "送信">
+				<form action="#" method="post" th:Object="${talk}">
+					<input type = "radio" name="name" value="あかまる">あかまる
+					<input type = "radio" name="name" value="あおまる">あおまる<br>
+					<input type = "radio" name="name" value="みどりまる">みどりまる
+					<input type = "radio" name="name" value="きまる">きまる<br>
+					<input type = "radio" name="name" value="くろまる">くろまる
+					<input type = "radio" name="name" value="しろまる">しろまる<br>
+					<textarea th:field="*{comment}" placeholder = "ここにがんばることやがんばったことをかいてね"></textarea>
+					<br>
+					<button type="submit" >送信</button><br>
+<!-- 					<small style="color:red" th:errors="*{talk}"></small> -->
 				</form>
 			</div>
+			<!-- 投稿内容一覧 -->
 			<div class= "col-xs-9" style = "background-color:#7fff7f">
-				<h1>投稿一覧</h1>
+				<h1>タイムライン</h1>
+				<table>
+	 			<tr th:each="talk:${talks}" th:inline="text" >
+				<td>[[${talk.id}]]</td>
+				<td>&nbsp;[[${talk.name}]]<br></td>
+				<td>&nbsp;[[${talk.comment}]]</td>
+				</tr>
+			 	</table>
 			</div>
 		</div>
 	</div>
