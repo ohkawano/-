@@ -17,17 +17,14 @@
 			<div class = "col-xs-3" style = "background-color:#7fbfff">
 				<h1>投稿フォーム</h1>
 				<!-- 実際に投稿する内容を入力します -->
-				<form action="#" method="post" th:Object="${talk}">
-					<input type = "radio" name="name" value="あかまる">あかまる
-					<input type = "radio" name="name" value="あおまる">あおまる<br>
-					<input type = "radio" name="name" value="みどりまる">みどりまる
-					<input type = "radio" name="name" value="きまる">きまる<br>
-					<input type = "radio" name="name" value="くろまる">くろまる
-					<input type = "radio" name="name" value="しろまる">しろまる<br>
-					<textarea th:field="*{comment}" placeholder = "ここにがんばることやがんばったことをかいてね"></textarea>
+				<form th:action="@{/add}" th:Object="${talk}" method="post">
+					<div th:each="item : ${radioItems}">
+					<!-- ラジオボタンの生成(変数名は必ずカラム名と連動させる) -->
+						<input type="radio" name="name" th:value="${item.key}" th:text="${item.value}">
+					</div>
+					<textarea th:field="*{comment}" placeholder="ここにがんばりたいことやがんばったことをかいてね"></textarea>
 					<br>
-					<button type="submit" >送信</button><br>
-<!-- 					<small style="color:red" th:errors="*{talk}"></small> -->
+					<button>送信</button><br>
 				</form>
 			</div>
 			<!-- 投稿内容一覧 -->
