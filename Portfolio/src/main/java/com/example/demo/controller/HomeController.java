@@ -1,10 +1,13 @@
 package com.example.demo.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import java.util.LinkedHashMap;
+import java.util.Map;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,11 +18,20 @@ import com.example.demo.repository.TalkRepository;
 @Controller
 public class HomeController {
 
-	@Autowired
 	private final TalkRepository talkRepository;
+	//ラジオボタンの変数宣言
+	private String radioName;
 
 	public HomeController(TalkRepository talkRepository) {
 		this.talkRepository = talkRepository;
+	}
+
+	public String getRadioName() {
+		return radioName;
+	}
+
+	public void setRadioName(String radioName) {
+		this.radioName = radioName;
 	}
 
 	//	ホーム画面の表示
@@ -28,10 +40,25 @@ public class HomeController {
 		return "home";
 	}
 
+	//ラジタボタンの生成
+	private Map<String, String> getRadioItems() {
+		Map<String, String> selectMap = new LinkedHashMap<String, String>();
+		/* 第1引数は値
+		 * 第2引数はHTMLで表示される選択肢 */
+		selectMap.put("あかまる", "あかまる");
+		selectMap.put("あおまる", "あおまる");
+		selectMap.put("みどりまる", "みどりまる");
+		selectMap.put("きまる", "きまる");
+		selectMap.put("くろまる", "くろまる");
+		selectMap.put("しろまる", "しろまる");
+		return selectMap;
+	}
+
 	//	タイムラインページの表示
-	@RequestMapping("/timeLine")
-	public String getTimeline(@ModelAttribute Talk talk, Model model) {
+	@GetMapping("/timeLine")
+	public String radioTimeLine(@ModelAttribute Talk talk, Model model) {
 		model.addAttribute("talks", talkRepository.findAll());
+		model.addAttribute("radioItems", getRadioItems());
 		return "timeLine";
 	}
 
@@ -43,7 +70,8 @@ public class HomeController {
 		if (result.hasErrors()) {
 			return "timeLine";
 		}
+		//コメントの登録
 		talkRepository.save(talk);
-		return "timeLine";
+		return "redirect:/timeLine";
 	}
 }
