@@ -14,16 +14,20 @@
     		font-family:'游ゴシック体';}
     </style>
   </head>
-  <body>
   	<body>
 		<div class = "container-fulid">
-			<nav class="navbar fixed-top navbar-light bg-white">
-				<a class="navbar-brand" th:href="@{/login}">管理者ログイン</a>
+			<nav class="navbar fixed-top navbar-light" style="background-color:#F7F7F7;">
+				<a class="navbar-brand" th:href="@{/home}" >Home</a>
 			</nav>
+			<!-- mtは上側の余白(マージン)のこと -->
 			<div class = "jumbotron text-center mt-5" style = "background-color:#F06060; ">
-				<h1 class = "display-3 mb-3" style = "color:#F7F7F7">「 maru 」</h1>
-				<p>消せないSNS</p>
-				<a th:href="@{/timeLine}" class="btn btn-outline-light mt-3">はいってみる</a>
+				<!-- displayは文字サイズ・mbは下側の余白のこと -->
+				<h1 class = "display-5 mb-4">管理者ログイン</h1>
+				<form id="login" th:action="login" method="post">
+				<p>ユーザーID　<input class="mb-3" type="text" style="border-radius:10px; background-color:#F7F7F7;" autofocus/><br></p>
+				<p>パスワード　<input class="mb-3" type="text" style="border-radius:10px; background-color:#F7F7F7;"/></p>
+				</form>
+				<a class="btn btn-outline-light mt-1" style = "color:#F7F7F7">ログイン</a>
 			</div>
 		</div>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
