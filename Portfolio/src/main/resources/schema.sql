@@ -3,3 +3,8 @@ id INT PRIMARY KEY AUTO_INCREMENT,
 name VARCHAR(10),
 comment VARCHAR(500)
 );
+
+CREATE TABLE IF NOT EXISTS adminisrators(
+user_name VARCHAR(50) PRIMARY KEY,
+password VARCHAR(50) NOT NULL
+);

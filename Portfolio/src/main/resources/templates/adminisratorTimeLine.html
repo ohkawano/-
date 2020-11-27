@@ -7,7 +7,7 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-    <title>maru一覧</title>
+    <title>管理者画面</title>
     <style>
     	body{
     		 color:#F7F7F7;
@@ -24,14 +24,11 @@
 		<div class = "row">
 			<div class = "col-4" style = "background-color:#F06060;">
 				<!-- 実際に投稿する内容を入力します -->
-				<form th:action="@{/add}" th:Object="${talk}" method="post" class="p-4" style="background-color:#F7F7F7; color:#696969;">
+				<form th:action="@{/adminisratorAdd}" th:Object="${talk}" method="post" class="p-4" style="background-color:#F7F7F7; color:#696969;">
 					<h3 class="mb-3">とうこうする</h3>
-					<div th:each="item : ${radioItems}">
-					<!-- ラジオボタンの生成(変数名は必ずカラム名と連動させる) -->
-						<input type="radio" name="name" th:value="${item.key}" th:text="${item.value}">
-					</div>
+					<input type="radio" name="name" value="かんりしゃ"  checked>かんりしゃ<br/>
 					<!-- autofocusを入れることで最初からテキストボックスの中にカーソルが出るようになる -->
-					<textarea th:field="*{comment}" placeholder="ここにがんばりたいことやがんばったことをかいてね" autofocus class="my-2"></textarea>
+					<textarea th:field="*{comment}" placeholder="管理者からのお知らせを書いてね" class="my-2" autofocus></textarea>
 					<br>
 					<button>そうしん</button><br>
 				</form>
@@ -39,8 +36,11 @@
 			<!-- 投稿内容一覧 -->
 			<div class= "col-8" style="background-color:#F7F7F7; color:#696969;">
 				<h3 class="my-4">　たいむらいん。</h3>
+				<div th:if="${talks.size() == 0}">
+					投稿されたコメントはありません
+				</div>
 				<ul th:each="talk:${talks}" th:inline="text">
-				<li>[[${talk.id}]]</li>
+				<li>[[${talk.id}]].　<a th:href="@{/adminisratorDelete?(id=*{talk.id})}"><button>さくじょ</button></a></li>
 				<li>[[${talk.name}]]</li>
 				<li>[[${talk.comment}]]</li>
 				</ul>

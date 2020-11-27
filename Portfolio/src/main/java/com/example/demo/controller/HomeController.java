@@ -68,7 +68,7 @@ public class HomeController {
 	public String addComment(@Validated @ModelAttribute Talk talk, BindingResult result, Model model) {
 		model.addAttribute("talks", talkRepository.findAll());
 		if (result.hasErrors()) {
-			return "timeLine";
+			return "redirect:/timeLine";
 		}
 		//コメントの登録
 		talkRepository.save(talk);
