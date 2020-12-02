@@ -18,7 +18,7 @@
   	<body>
 		<div class = "container-fulid">
 			<nav class="navbar fixed-top navbar-light" style="background-color:#F7F7F7;">
-				<a class="navbar-brand" th:href="@{/home}" >Home</a>
+				<a class="navbar-brand" th:href="@{/home}" >ホーム</a>
 			</nav>
 			<!-- mtは上側の余白(マージン)のこと -->
 			<div class = "jumbotron text-center mt-5" style = "background-color:#F06060; ">
@@ -33,7 +33,7 @@
 				<form th:action="@{/signIn}" method="post" th:Object="${adminisrators}">
 				<div><p>ユーザーID　<input type="text" name="username" class="mb-3" style="border-radius:10px; background-color:#F7F7F7;" autofocus/></p></div>
 				<div><p>パスワード　<input type="password" name="authority" class="mb-3" style="border-radius:10px; background-color:#F7F7F7;"/></p></div>
-				<div><input type="submit" value="ログイン"></div>
+				<div><input type="submit" class="btn btn-outline-light mt-3" value="ログイン"></div>
 				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 				</form>
 			</div>

@@ -20,25 +20,30 @@
   </head>
   <body>
 	<div class = "container-fluid" style = "background-color:#F06060;">
-		<h1 class="my-4" align="center">「　みんなのまる。」</h1>
+	<a th:href="@{/home}" class="btn btn-outline-light mt-3">ホーム</a>
+		<h1 class="mb-4" align="center">「　みんなのまる。」</h1>
 		<div class = "row">
 			<div class = "col-4" style = "background-color:#F06060;">
 				<!-- 実際に投稿する内容を入力します -->
 				<form th:action="@{/add}" th:Object="${talk}" method="post" class="p-4" style="background-color:#F7F7F7; color:#696969;">
-					<h3 class="mb-3">とうこうする</h3>
+					<h3 class="mb-3">投稿する</h3>
+					<comment class="mb-1">好きなアイコンを選んでね</comment>
 					<div th:each="item : ${radioItems}">
 					<!-- ラジオボタンの生成(変数名は必ずカラム名と連動させる) -->
 						<input type="radio" name="name" th:value="${item.key}" th:text="${item.value}">
 					</div>
 					<!-- autofocusを入れることで最初からテキストボックスの中にカーソルが出るようになる -->
-					<textarea th:field="*{comment}" placeholder="ここにがんばりたいことやがんばったことをかいてね" autofocus class="my-2"></textarea>
+					<textarea th:field="*{comment}" placeholder="コメン入力欄" class="my-2"></textarea>
 					<br>
-					<button>そうしん</button><br>
+						<input type="submit" class="btn btn-outline-dark mt-3" style="color:#696969;" value="そうしん"/>
 				</form>
 			</div>
 			<!-- 投稿内容一覧 -->
 			<div class= "col-8" style="background-color:#F7F7F7; color:#696969;">
-				<h3 class="my-4">　たいむらいん。</h3>
+				<h3 class="my-4">　タイムライン</h3>
+				<div th:if="${talks.size() == 0}">
+					投稿されたコメントはありません
+				</div>
 				<ul th:each="talk:${talks}" th:inline="text">
 				<li>[[${talk.id}]]</li>
 				<li>[[${talk.name}]]</li>

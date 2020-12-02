@@ -11,6 +11,7 @@ import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @EnableWebSecurity
@@ -56,10 +57,10 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 				.usernameParameter("username")
 				.passwordParameter("authority")
 				.defaultSuccessUrl("/adminisratorTimeLine", true)
-				.failureUrl("/login?error").permitAll()
-				.and()
-				.logout()
-				.logoutSuccessUrl("/logout").permitAll()
+				.failureUrl("/login?error").permitAll();
+		http.logout()
+				.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+				.logoutSuccessUrl("/login").permitAll()
 				.deleteCookies("JSESSIONID");
 	}
 

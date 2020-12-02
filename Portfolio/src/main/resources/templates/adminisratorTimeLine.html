@@ -21,27 +21,28 @@
   </head>
   <body>
 	<div class = "container-fluid" style = "background-color:#F06060;">
-		<h1 class="my-4" align="center">「　みんなのまる。」</h1>
+		<a th:href="@{/logout}" class="btn btn-outline-light mt-3">ログアウト</a>
+		<h1 class="mb-4" align="center">「　管理者画面　」</h1>
 		<div class = "row">
 			<div class = "col-4" style = "background-color:#F06060;">
 				<!-- 実際に投稿する内容を入力します -->
 				<form th:action="@{/adminisratorAdd}" th:Object="${talk}" method="post" class="p-4" style="background-color:#F7F7F7; color:#696969;">
-					<h3 class="mb-3">とうこうする</h3>
-					<input type="radio" name="name" value="かんりしゃ"  checked>かんりしゃ<br/>
+					<h3 class="mb-3">投稿する</h3>
+					<input type="radio" name="name" value="管理者"  checked>管理者<br/>
 					<!-- autofocusを入れることで最初からテキストボックスの中にカーソルが出るようになる -->
-					<textarea th:field="*{comment}" placeholder="管理者からのお知らせを書いてね" class="my-2" autofocus></textarea>
+					<textarea th:field="*{comment}" placeholder="管理者からのお知らせ" class="my-2" autofocus></textarea>
 					<br>
-					<button>そうしん</button><br>
+					<input type="submit" class="btn btn-outline-dark mt-3" style="color:#696969;" value="そうしん"/>
 				</form>
 			</div>
 			<!-- 投稿内容一覧 -->
 			<div class= "col-8" style="background-color:#F7F7F7; color:#696969;">
-				<h3 class="my-4">　たいむらいん。</h3>
+				<h3 class="my-4">タイムライン</h3>
 				<div th:if="${talks.size() == 0}">
 					投稿されたコメントはありません
 				</div>
 				<ul th:each="talk:${talks}" th:inline="text">
-				<li>[[${talk.id}]].　<a th:href="@{/adminisratorDelete?(id=*{talk.id})}"><button>さくじょ</button></a></li>
+				<li>[[${talk.id}]].　<a th:href="@{/adminisratorDelete?(id=*{talk.id})}" class="btn btn-outline-dark mt-3">削除</a></li>
 				<li>[[${talk.name}]]</li>
 				<li>[[${talk.comment}]]</li>
 				</ul>
