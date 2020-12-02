@@ -33,7 +33,7 @@
 						<input type="radio" name="name" th:value="${item.key}" th:text="${item.value}">
 					</div>
 					<!-- autofocusを入れることで最初からテキストボックスの中にカーソルが出るようになる -->
-					<textarea th:field="*{comment}" placeholder="コメン入力欄" class="my-2"></textarea>
+					<textarea th:field="*{comment}" placeholder="コメント入力欄" class="my-2"></textarea>
 					<br>
 						<input type="submit" class="btn btn-outline-dark mt-3" style="color:#696969;" value="そうしん"/>
 				</form>
@@ -45,7 +45,7 @@
 					投稿されたコメントはありません
 				</div>
 				<ul th:each="talk:${talks}" th:inline="text">
-				<li>[[${talk.id}]]</li>
+				<li>[[${talk.nowdate}]]</li>
 				<li>[[${talk.name}]]</li>
 				<li>[[${talk.comment}]]</li>
 				</ul>

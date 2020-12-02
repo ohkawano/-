@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import java.time.LocalDateTime;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -70,6 +71,8 @@ public class HomeController {
 		if (result.hasErrors()) {
 			return "redirect:/timeLine";
 		}
+		//日付取得
+		talk.setNowdate(LocalDateTime.now());
 		//コメントの登録
 		talkRepository.save(talk);
 		return "redirect:/timeLine";

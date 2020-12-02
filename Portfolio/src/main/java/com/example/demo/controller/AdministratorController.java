@@ -1,5 +1,7 @@
 package com.example.demo.controller;
 
+import java.time.LocalDateTime;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -39,6 +41,7 @@ public class AdministratorController {
 		if (result.hasErrors()) {
 			return "redirect:/adminisratorTimeLine";
 		}
+		talk.setNowdate(LocalDateTime.now());
 		talkRepository.save(talk);
 		return "redirect:adminisratorTimeLine";
 	}

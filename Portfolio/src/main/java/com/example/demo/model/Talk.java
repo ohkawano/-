@@ -1,5 +1,7 @@
 package com.example.demo.model;
 
+import java.time.LocalDateTime;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -15,6 +17,8 @@ public class Talk {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 
+	private LocalDateTime nowdate;
+
 	@NotBlank
 	@Size(max = 10)
 	private String name;
@@ -27,9 +31,11 @@ public class Talk {
 
 	}
 
-	public Talk(long id, @NotBlank @Size(max = 10) String name, @NotBlank @Size(max = 500) String comment) {
+	public Talk(long id, @NotBlank @Size(max = 10) String name, LocalDateTime nowdate,
+			@NotBlank @Size(max = 500) String comment) {
 		super();
 		this.id = id;
+		this.nowdate = nowdate;
 		this.name = name;
 		this.comment = comment;
 	}
@@ -40,6 +46,14 @@ public class Talk {
 
 	public void setId(long id) {
 		this.id = id;
+	}
+
+	public LocalDateTime getNowdate() {
+		return nowdate;
+	}
+
+	public void setNowdate(LocalDateTime nowdate) {
+		this.nowdate = nowdate;
 	}
 
 	public String getName() {

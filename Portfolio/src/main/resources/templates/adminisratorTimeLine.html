@@ -42,7 +42,7 @@
 					投稿されたコメントはありません
 				</div>
 				<ul th:each="talk:${talks}" th:inline="text">
-				<li>[[${talk.id}]].　<a th:href="@{/adminisratorDelete?(id=*{talk.id})}" class="btn btn-outline-dark mt-3">削除</a></li>
+				<li>[[${talk.nowdate}]].　<a th:href="@{/adminisratorDelete?(id=*{talk.id})}" class="btn btn-outline-dark mt-3">削除</a></li>
 				<li>[[${talk.name}]]</li>
 				<li>[[${talk.comment}]]</li>
 				</ul>
