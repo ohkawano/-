@@ -16,13 +16,14 @@ import com.example.demo.repository.TalkRepository;
 
 @Controller
 public class AdministratorController {
-
+	//リポジトリ使えるように宣言
 	private final TalkRepository talkRepository;
 
 	public AdministratorController(TalkRepository talkRepository) {
 		this.talkRepository = talkRepository;
 	}
 
+	//ログイン画面の取得
 	@GetMapping("/login")
 	public String login() {
 		return "adminisratorLogin";
@@ -35,6 +36,7 @@ public class AdministratorController {
 		return "adminisratorTimeLine";
 	}
 
+	//管理者画面での投稿
 	@PostMapping("/adminisratorAdd")
 	public String adminisratorAdd(@Validated @ModelAttribute Talk talk, BindingResult result, Model model) {
 		model.addAttribute("talks", talkRepository.findAll());
@@ -46,6 +48,7 @@ public class AdministratorController {
 		return "redirect:adminisratorTimeLine";
 	}
 
+	//管理者画面での削除
 	@GetMapping("/adminisratorDelete")
 	public String adminisratorDelete(@Validated @ModelAttribute Talk talk, BindingResult result, Model model) {
 		model.addAttribute("talks", talkRepository.findAll());

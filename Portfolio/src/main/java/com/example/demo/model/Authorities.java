@@ -5,6 +5,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
+//管理者アカウントのEntity
 @Table(name = "authorities")
 @Entity
 public class Authorities {

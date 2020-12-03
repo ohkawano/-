@@ -7,12 +7,12 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
+//SpringSecurityの設定
 @Configuration
 @EnableWebSecurity
 public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
@@ -23,9 +23,11 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 		return new BCryptPasswordEncoder();
 	}
 
+	//DBを使うので宣言
 	@Autowired
 	private DataSource dataSource;
 
+	//管理者アカウントの検索クエリ
 	private static final String UserSQL = "SELECT"
 			+ " username,"
 			+ " authority,"
@@ -36,21 +38,16 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 			+ " username=?";
 
 	@Override
-	public void configure(WebSecurity web) throws Exception {
-		web.ignoring()
-				.antMatchers("/css/**", "/image/**", "/js/**");
-	}
-
-	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		/* 以下はアクセス設定です
-		 * .permitAll()がついているものは全員がアクセスOK
+		/* アクセス設定
+		 * .permitAll()がついているものは全員がアクセス可能
 		 * それ以外は.anyRequest().authenticated();でアクセス禁止*/
 		http.authorizeRequests()
 				.antMatchers("/home").permitAll()
 				.antMatchers("/timeLine").permitAll()
 				.antMatchers("/add").permitAll()
 				.anyRequest().authenticated();
+		//ログイン時の設定
 		http.formLogin()
 				.loginPage("/login").permitAll()
 				.loginProcessingUrl("/signIn")
@@ -58,6 +55,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 				.passwordParameter("authority")
 				.defaultSuccessUrl("/adminisratorTimeLine", true)
 				.failureUrl("/login?error").permitAll();
+		//ログアウトの設定
 		http.logout()
 				.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
 				.logoutSuccessUrl("/login").permitAll()
@@ -66,6 +64,9 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	public void configure(AuthenticationManagerBuilder auth) throws Exception {
+		/*ログイン時の挙動の設定
+		 * jdbcAuthentication()でDBからユーザー情報を読み込むみたいです
+		 */
 		auth.jdbcAuthentication()
 				.dataSource(dataSource)
 				.usersByUsernameQuery(UserSQL)

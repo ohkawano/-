@@ -19,6 +19,7 @@ import com.example.demo.repository.TalkRepository;
 @Controller
 public class HomeController {
 
+	//リポジトリ利用できるように宣言
 	private final TalkRepository talkRepository;
 	//ラジオボタンの変数宣言
 	private String radioName;

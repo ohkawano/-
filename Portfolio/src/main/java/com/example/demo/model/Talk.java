@@ -10,6 +10,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
+//投稿部分のEntitiy
 @Table(name = "talk")
 @Entity
 public class Talk {
