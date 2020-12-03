@@ -18,6 +18,7 @@
   	<body>
 		<div class = "container-fulid">
 			<nav class="navbar fixed-top navbar-light" style="background-color:#F7F7F7;">
+				<!-- ホーム画面にアクセス -->
 				<a class="navbar-brand" th:href="@{/home}" >ホーム</a>
 			</nav>
 			<!-- mtは上側の余白(マージン)のこと -->
@@ -30,6 +31,7 @@
 				<div th:if="${param.logout}">
 					ログアウトしました
 				</div><br>
+				<!-- ログインフォーム -->
 				<form th:action="@{/signIn}" method="post" th:Object="${adminisrators}">
 				<div><p>ユーザーID　<input type="text" name="username" class="mb-3" style="border-radius:10px; background-color:#F7F7F7;" autofocus/></p></div>
 				<div><p>パスワード　<input type="password" name="authority" class="mb-3" style="border-radius:10px; background-color:#F7F7F7;"/></p></div>
