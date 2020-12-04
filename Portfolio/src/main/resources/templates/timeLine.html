@@ -21,7 +21,7 @@
   <body>
 	<div class = "container-fluid" style = "background-color:#F06060;">
 	<a th:href="@{/home}" class="btn btn-outline-light mt-3">ホーム</a>
-		<h1 class="mb-4" align="center">「　みんなのまる。」</h1>
+		<h1 class="mb-4" align="center">「　みんなのhomete　」</h1>
 		<div class = "row">
 			<div class = "col-4" style = "background-color:#F06060;">
 				<!-- 実際に投稿する内容を入力します -->
@@ -42,7 +42,7 @@
 			<div class= "col-8" style="background-color:#F7F7F7; color:#696969;">
 				<h3 class="my-4">　タイムライン</h3>
 				<div th:if="${talks.size() == 0}">
-					投稿されたコメントはありません
+					投稿されたhometeはありません
 				</div>
 				<ul th:each="talk:${talks}" th:inline="text">
 				<li>[[${talk.nowdate}]]</li>
